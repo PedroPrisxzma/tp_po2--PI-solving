@@ -23,22 +23,31 @@ def simplex(progL):
         #print to file
         if(result == 42):
 #----------------------------------------------------------------------------------------------------------
+            sol_int_done = 0
             if(progL.method == 0):
                 pi.cut_planes(progL_methods, file_f)
                 size = np.shape(progL_methods.FPI_A)
                 sol_int = np.zeros(size[1])
-            elif(progL.methods == 1):
-                pi.branch_bound(progL_methods, file_f)
-
+            elif(progL.method == 1):
+                vo = pi.branch_bound(progL_methods, file_f, 0)
+                progL_methods.vo = vo[0]
+                size = np.shape(progL_methods.FPI_A)
+                sol_int = vo[1]
+                sol_int_done = 1
+                s_int_aux = str(sol_int)
+                s_int = ''
+                for h in range(len(progL_methods.i_variables * 2)):
+                    s_int = s_int + s_int_aux[h]
+                s_int = s_int + ']'
             #dictionary to build solution
             for i in range(len(progL.base)):
                 sol[progL.base[i]] = progL.FPI_b[i]
-
-            for i in range(len(progL_methods.base)):
-                sol_int[progL_methods.base[i]] = progL_methods.FPI_b[i]
+            if(sol_int_done != 1):
+                for i in range(len(progL_methods.base)):
+                    sol_int[progL_methods.base[i]] = progL_methods.FPI_b[i]
+                s_int = str(sol_int[:-(size[1] - len(progL_methods.i_variables))])
 
             #print to file
-            s_int = str(sol_int[:-(size[1] - len(progL_methods.i_variables))])
             vo_int = str(progL_methods.vo)
             s = str(sol[:-progL.m])
             vo = str(progL.vo)
@@ -59,19 +68,31 @@ def simplex(progL):
         #print to file
         if(result == 42):
 #----------------------------------------------------------------------------------------------------------
+            sol_int_done = 0
             if(progL.method == 0):
                 pi.cut_planes(progL_methods, file_f)
-            elif(progL.methods == 1):
-                pi.branch_bound(progL_methods, file_f)
+                size = np.shape(progL_methods.FPI_A)
+                sol_int = np.zeros(size[1])
+            elif(progL.method == 1):
+                vo = pi.branch_bound(progL_methods, file_f, 0)
+                progL_methods.vo = vo[0]
+                size = np.shape(progL_methods.FPI_A)
+                sol_int = vo[1]
+                sol_int_done = 1
+                s_int_aux = str(sol_int)
+                s_int = ''
+                for h in range(len(progL_methods.i_variables * 2)):
+                    s_int = s_int + s_int_aux[h]
+                s_int = s_int + ']'
             #dictionary to build solution
             for i in range(len(progL.base)):
                 sol[progL.base[i]] = progL.FPI_b[i]
-
-            for i in range(len(progL_methods.base)):
-                sol_int[progL_methods.base[i]] = progL_methods.FPI_b[i]
+            if(sol_int_done != 1):
+                for i in range(len(progL_methods.base)):
+                    sol_int[progL_methods.base[i]] = progL_methods.FPI_b[i]
+                s_int = str(sol_int[:-(size[1] - len(progL_methods.i_variables))])
 
             #print to file
-            s_int = str(sol_int[:-(size[1] - len(progL_methods.i_variables))])
             vo_int = str(progL_methods.vo)
             s = str(sol[:-progL.m])
             vo = str(progL.vo)
@@ -91,20 +112,31 @@ def simplex(progL):
         #print to file
         if(result == 42):
 #----------------------------------------------------------------------------------------------------------
+            sol_int_done = 0
             if(progL.method == 0):
                 pi.cut_planes(progL_methods, file_f)
-            elif(progL.methods == 1):
-                pi.branch_bound(progL_methods, file_f)
-
+                size = np.shape(progL_methods.FPI_A)
+                sol_int = np.zeros(size[1])
+            elif(progL.method == 1):
+                vo = pi.branch_bound(progL_methods, file_f, 0)
+                progL_methods.vo = vo[0]
+                size = np.shape(progL_methods.FPI_A)
+                sol_int = vo[1]
+                sol_int_done = 1
+                s_int_aux = str(sol_int)
+                s_int = ''
+                for h in range(len(progL_methods.i_variables * 2)):
+                    s_int = s_int + s_int_aux[h]
+                s_int = s_int + ']'
             #dictionary to build solution
             for i in range(len(progL.base)):
                 sol[progL.base[i]] = progL.FPI_b[i]
-
-            for i in range(len(progL_methods.base)):
-                sol_int[progL_methods.base[i]] = progL_methods.FPI_b[i]
+            if(sol_int_done != 1):
+                for i in range(len(progL_methods.base)):
+                    sol_int[progL_methods.base[i]] = progL_methods.FPI_b[i]
+                s_int = str(sol_int[:-(size[1] - len(progL_methods.i_variables))])
 
             #print to file
-            s_int = str(sol_int[:-(size[1] - len(progL_methods.i_variables))])
             vo_int = str(progL_methods.vo)
             s = str(sol[:-progL.m])
             vo = str(progL.vo)
